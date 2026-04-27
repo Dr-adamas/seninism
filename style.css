@@ -1,0 +1,364 @@
+:root {
+    --bg-color: #fdfcf8;
+    --text-color: #2c2c2c;
+    --accent-color: #3e4a3e; /* Хвойный */
+    --hover-color: #a68b5b;  /* Золотистый */
+    --secondary-text: #6b6b6b;
+    --border-color: #e8e5db;
+    --white: #ffffff;
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: radial-gradient(circle at center, #ffffff 0%, #fdfcf8 100%);
+    color: var(--text-color);
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 850px;
+    width: 90%;
+    margin: 80px auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--hover-color);
+    margin: 20px auto 0;
+}
+
+.tagline {
+    font-style: italic;
+    color: var(--secondary-text);
+    margin-top: 20px;
+}
+
+/* Навигация */
+.main-nav {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    position: relative;
+    padding-bottom: 8px;
+    transition: var(--transition);
+}
+
+.main-nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--hover-color);
+    transition: var(--transition);
+    transform: translateX(-50%);
+}
+
+.main-nav a:hover {
+    color: var(--hover-color);
+}
+
+.main-nav a:hover::before {
+    width: 100%;
+}
+
+/* Секции */
+section {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s forwards ease-out;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.content-block {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+/* Стили Теории */
+.theory-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.theory-summary {
+    font-size: 1.15rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 25px;
+}
+
+.theory-steps {
+    display: grid;
+    gap: 25px;
+}
+
+.step {
+    padding-left: 20px;
+    border-left: 1px solid var(--hover-color);
+}
+
+.step h3 {
+    font-size: 1rem;
+    color: var(--hover-color);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.theory-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.read-more-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: var(--transition);
+}
+
+.read-more-btn:hover {
+    background: var(--accent-color);
+    color: var(--white);
+}
+
+/* Сетка ссылок */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.grid-item {
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    background: var(--white);
+    transition: var(--transition);
+}
+
+.grid-item:hover {
+    border-color: var(--hover-color);
+    transform: translateY(-5px);
+}
+
+.quote-box {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    font-style: italic;
+    font-size: 1.3rem;
+    border-radius: 2px;
+}
+
+footer {
+    margin-top: 100px;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    border-top: 1px solid var(--border-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.2rem; }
+}
+
+/* Специальный стиль для вступления биографии */
+.lead-text {
+    font-size: 1.25rem;
+    line-height: 1.9;
+    color: var(--accent-color);
+    font-style: italic;
+    text-align: center;
+}
+
+/* Расширенная сетка для карточек признания */
+#recognition .grid {
+    grid-template-columns: 1fr 1fr; /* Две колонки, на мобильных станет одной */
+    gap: 20px;
+}
+
+#recognition .grid-item strong {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--hover-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+/* Стили для Таймлайна */
+.timeline {
+    position: relative;
+    padding-left: 40px;
+    border-left: 1px solid var(--border-color);
+    margin-left: 20px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+/* Точка на линии */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -46px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: var(--hover-color);
+    border-radius: 50%;
+    border: 3px solid var(--bg-color);
+}
+
+.timeline-item .date {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: var(--hover-color);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.timeline-item h3 {
+    font-size: 1.2rem;
+    margin: 5px 0 10px 0;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timeline-item p {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Стили для Трактата */
+.treatise {
+    padding: 60px;
+    text-align: justify;
+}
+
+.treatise-header {
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+}
+
+.treatise-title {
+    font-size: 2.2rem;
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.treatise-subtitle {
+    font-style: italic;
+    color: var(--secondary-text);
+    font-size: 1.1rem;
+}
+
+.treatise-meta {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    color: var(--hover-color);
+}
+
+.abstract {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    margin-bottom: 40px;
+    color: var(--accent-color);
+    border-left: 2px solid var(--hover-color);
+    padding-left: 25px;
+    font-style: italic;
+}
+
+.treatise-body h3 {
+    margin-top: 50px;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.treatise-body p {
+    margin-bottom: 20px;
+    text-indent: 30px; /* Красная строка */
+}
+
+.treatise-body strong {
+    color: var(--hover-color);
+    font-weight: normal;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+    .treatise { padding: 30px 20px; }
+}
