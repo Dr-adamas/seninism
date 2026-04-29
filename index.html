@@ -75,25 +75,39 @@
 
 <script>
     const trigger = document.getElementById('senin-trigger');
-    trigger.addEventListener('click', () => {
-        const duration = 3 * 1000;
-        const animationEnd = Date.now() + duration;
 
-        (function frame() {
-            const timeLeft = animationEnd - Date.now();
-            if (timeLeft <= 0) return;
+trigger.addEventListener('click', () => {
+    // 1. ЗАПУСК САЛЮТОВ (у тебя уже был этот код)
+    const duration = 3 * 1000;
+    const animationEnd = Date.now() + duration;
 
-            const particleCount = 50 * (timeLeft / duration);
-            // Салюты вылетают случайным образом
-            confetti({
-                particleCount,
-                spread: 70,
-                origin: { x: Math.random(), y: Math.random() - 0.2 },
-                colors: ['#adff00', '#00f7ff', '#ff0055', '#bd00ff'] // Цвета под твой новый стиль
-            });
-            if (timeLeft > 0) requestAnimationFrame(frame);
-        }());
-    });
+    (function frame() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) return;
+
+        const particleCount = 50 * (timeLeft / duration);
+        confetti({
+            particleCount,
+            spread: 70,
+            origin: { x: Math.random(), y: Math.random() - 0.2 },
+            colors: ['#39ff14', '#00f7ff', '#ff00ff', '#ffffff'] 
+        });
+        if (timeLeft > 0) requestAnimationFrame(frame);
+    }());
+
+    // 2. ВЫЛЕТ ФОТОГРАФИИ
+    // Создаем элемент изображения
+    const stasPhoto = document.createElement('img');
+    stasPhoto.src = 'img/stas.png'; // Убедись, что файл лежит в папке img под этим именем!
+    stasPhoto.classList.add('stas-surprise');
+    document.body.appendChild(stasPhoto);
+
+    // Удаляем фото через 3 секунды, чтобы не мешало
+    setTimeout(() => {
+        stasPhoto.style.opacity = '0';
+        setTimeout(() => stasPhoto.remove(), 1000);
+    }, 3000);
+});
 </script>
 
         <footer>
