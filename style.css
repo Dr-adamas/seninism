@@ -363,12 +363,6 @@ footer {
     .treatise { padding: 30px 20px; }
 }
 
-:root {
-    --text-color: #2c2c2c; /* Темно-серый */
-    --accent-color: #3e4a3e; /* Оливковый */
-    --hover-color: #a68b5b; /* Золотисто-коричневый */
-}
-
 .secret-trigger-container {
     text-align: center;
     padding: 100px 0;
