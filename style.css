@@ -317,3 +317,24 @@ tr:hover td {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
+/* ЭФФЕКТ ВЫЛЕТА СТАСА */
+.stas-surprise {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 9999;
+    border: 10px solid var(--electric-cyan);
+    box-shadow: 0 0 50px var(--acid-green);
+    max-width: 80vw;
+    max-height: 80vh;
+    animation: stas-appear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transition: opacity 1s;
+    pointer-events: none; /* Чтобы фото не мешало кликать дальше */
+}
+
+@keyframes stas-appear {
+    0% { transform: translate(-50%, -50%) scale(0) rotate(-45deg); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
