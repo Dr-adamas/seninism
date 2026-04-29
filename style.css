@@ -362,3 +362,62 @@ footer {
 @media (max-width: 600px) {
     .treatise { padding: 30px 20px; }
 }
+
+:root {
+    --text-color: #2c2c2c; /* Темно-серый */
+    --accent-color: #3e4a3e; /* Оливковый */
+    --hover-color: #a68b5b; /* Золотисто-коричневый */
+}
+
+.secret-trigger-container {
+    text-align: center;
+    padding: 100px 0;
+    background-color: transparent; /* Или #fdfcf8, если фон страницы такой */
+}
+
+#senin-trigger {
+    font-family: 'Georgia', serif; /* Или 'Verdana' */
+    font-size: 1.4rem; /* Аккуратный, небольшой размер */
+    font-weight: bold;
+    color: var(--accent-color);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.4s ease;
+    position: relative;
+    display: inline-block;
+}
+
+#senin-trigger:hover {
+    color: var(--hover-color);
+    transform: none; /* Убираем масштаб и наклон */
+}
+
+/* Эффект подчеркивания при наведении */
+#senin-trigger::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--hover-color);
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+}
+
+#senin-trigger:hover::before {
+    width: 100%;
+}
+
+.secret-zone {
+    display: flex;
+    justify-content: center; /* Выравнивает по центру по горизонтали */
+    align-items: center;     /* Выравнивает по центру по вертикали */
+    width: 100%;             /* Растягивает контейнер на всю ширину */
+    padding: 100px 0;        /* Отступы сверху и снизу */
+}
+
+#senin-trigger {
+    display: inline-block;
+}
