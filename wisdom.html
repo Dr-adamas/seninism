@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор Смыслов — Сенинизм</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Оракул</h1>
+			<p class="tagline">Получи крупицу мудрости Сенина</p>
+            <nav class="main-nav">
+                <a href="index.html">Главная</a>
+                <a href="founder.html">Об основателе</a>
+                <a href="history.html">История</a>
+                <a href="texts.html">Библиотека</a>
+                <a href="thanks.html">Зал славы</a>
+                <a href="gallery.html">Галерея</a>
+				<a href="wisdom.html">Оракул</a>
+            </nav>
+        </header>
+
+        <section id="oracle-section">
+            <div class="oracle-container">
+                <div id="wisdom-display" class="wisdom-text">Нажми на кристалл, чтобы познать истину...</div>
+                <button id="get-wisdom-btn" class="crystal-btn">◈</button>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 Мелитополь — Центр Сенинского Сдвига
+        </footer>
+    </div>
+
+    <script>
+        const originalWisdoms = [
+    "Худой мир лучше сраного +7телекома.",
+    "Не держи обиду, держи чай, а то прольеш.",
+    "Делу время, а потехехехехехе.",
+    "Скажи мне, кто твой друг, и я скажу, что ты тупой.",
+    "Держи ноги в тепле, желудок в голоде, а голову в растворе формалина.",
+    "С кем поведешься, того и сдашь ментам.",
+    "Прыгай, как кузнечик, пархай, как бабочка, жаль, что мать сдохла.",
+    "Одна ошибка и ты ошибся.",
+    "Не откладывай на завтра то, что можно отложить на послезавтра.",
+    "Горькая правда лучше, простреленной ноги."
+];
+
+// Копия списка, из которой будем удалять элементы
+let availableWisdoms = [...originalWisdoms];
+
+const display = document.getElementById('wisdom-display');
+const btn = document.getElementById('get-wisdom-btn');
+
+btn.addEventListener('click', () => {
+    // Эффект мерцания
+    display.style.opacity = 0;
+    
+    setTimeout(() => {
+        // Если цитаты закончились, берем новый список
+        if (availableWisdoms.length === 0) {
+            availableWisdoms = [...originalWisdoms];
+            console.log("Цикл завершен. Реальность обновлена.");
+        }
+
+        // Выбираем случайный индекс из оставшихся
+        const randomIndex = Math.floor(Math.random() * availableWisdoms.length);
+        
+        // Извлекаем цитату (splice удаляет её из массива и возвращает нам)
+        const selectedWisdom = availableWisdoms.splice(randomIndex, 1)[0];
+
+        display.innerText = selectedWisdom;
+        display.style.opacity = 1;
+    }, 300);
+});
+    </script>
+</body>
+</html>
