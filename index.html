@@ -110,6 +110,50 @@ trigger.addEventListener('click', () => {
     }, 3000);
 });
 </script>
+<!-- Красная точка -->
+<div id="dead-pixel"></div>
+
+<!-- Экран со смертью (по умолчанию скрыт) -->
+<div id="death-overlay">
+    <div class="blood-text">СМЕРТЬ</div>
+</div>
+<script>
+    let clicks = 0;
+    const pixel = document.getElementById('dead-pixel');
+    const overlay = document.getElementById('death-overlay');
+
+    // Функция обработки "поимки"
+    function handleCatch(e) {
+        // Предотвращаем стандартное поведение (важно для сенсоров, чтобы не зумило)
+        if (e.type === 'touchstart') e.preventDefault();
+
+        clicks++;
+
+        if (clicks >= 10) {
+            overlay.style.display = 'flex'; // Показываем смерть
+            pixel.style.display = 'none';   // Прячем пиксель
+            
+            // Через 4 секунды всё вернется в норму
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                pixel.style.display = 'block';
+                clicks = 0;
+            }, 4000);
+        } else {
+            // Перемещаем пиксель в случайное место
+            // Используем расчет, чтобы точка не вылетала за края экрана
+            const newX = Math.floor(Math.random() * 90) + 2;
+            const newY = Math.floor(Math.random() * 90) + 2;
+            
+            pixel.style.left = newX + '%';
+            pixel.style.top = newY + '%';
+        }
+    }
+
+    // Слушаем и мышку, и касания
+    pixel.addEventListener('mouseover', handleCatch);
+    pixel.addEventListener('touchstart', handleCatch, {passive: false});
+</script>
 
         <footer>
             © 2026 ssproduction
