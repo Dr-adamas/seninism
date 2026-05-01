@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Энигма</title>
+</head>
+	<div class="container">
+			<header>
+				<h1>Энигма</h1>
+				<p class="tagline">Настоящая, рабочая версия энигмы</p>
+				
+				<nav class="main-nav">
+					<a href="index.html">Главная</a>
+					<a href="founder.html">Об основателе</a>
+					<a href="history.html">История</a>
+					<a href="texts.html">Библиотека</a>
+					<a href="thanks.html">Зал славы</a>
+					<a href="gallery.html">Галерея</a>
+					<a href="wisdom.html">Оракул</a>
+					<a href="enigma.html">Энигма</a>
+				</nav>
+			</header>
+<body>
+
+    <div class="enigma-terminal">
+        <h2>Энигма</h2>
+        
+        <div class="rotor-section">
+            <label>УСТАНОВИТЕ ПАРАМЕТРЫ РОТОРОВ (КОДОВОЕ СЛОВО):</label>
+            <input type="text" id="enigma-key" placeholder="КЛЮЧ..." autocomplete="off">
+        </div>
+
+        <textarea id="enigma-input" placeholder="Введите ваше сообщение для трансформации..."></textarea>
+
+        <div class="control-panel">
+            <button onclick="runEnigma('encrypt')">Зашифровать</button>
+            <button onclick="runEnigma('decrypt')">Расшифровать</button>
+        </div>
+
+        <div class="enigma-output-box" onclick="copyResult()">
+            <div id="enigma-result">ОЖИДАНИЕ ВВОДА СИГНАЛА...</div>
+            <span class="copy-hint">нажмите, чтобы скопировать</span>
+        </div>
+    </div>
+
+    <script>
+        // ГЛАВНЫЙ МЕХАНИЗМ ЭНИГМЫ
+        function runEnigma(mode) {
+            const text = document.getElementById('enigma-input').value;
+            const key = document.getElementById('enigma-key').value;
+            const output = document.getElementById('enigma-result');
+
+            if (!key) {
+                alert("КРИТИЧЕСКАЯ ОШИБКА: Кодовое слово не установлено. Резонанс невозможен.");
+                return;
+            }
+
+            if (!text) {
+                alert("ВНИМАНИЕ: Поле ввода пусто.");
+                return;
+            }
+
+            let result = "";
+
+            // Алгоритм циклического смещения на основе ключа и позиции
+            for (let i = 0; i < text.length; i++) {
+                let charCode = text.charCodeAt(i);
+                
+                // Ключ влияет на каждый символ по-разному в зависимости от его позиции
+                let keyIndex = i % key.length;
+                let keyCharValue = key.charCodeAt(keyIndex);
+                
+                // Сложное смещение: значение ключа + позиция в тексте
+                let shift = keyCharValue + (i * key.length);
+                
+                if (mode === 'encrypt') {
+                    // Используем остаток от деления на диапазон Unicode, чтобы не вылетать за границы
+                    result += String.fromCharCode((charCode + shift) % 65535);
+                } else {
+                    // Обратный процесс для дешифровки
+                    result += String.fromCharCode((charCode - shift + (65535 * 100)) % 65535);
+                }
+            }
+
+            // Визуальный эффект обновления
+            output.style.opacity = 0;
+            setTimeout(() => {
+                output.innerText = result;
+                output.style.opacity = 1;
+            }, 200);
+        }
+
+        // ФУНКЦИЯ КОПИРОВАНИЯ
+        function copyResult() {
+            const text = document.getElementById('enigma-result').innerText;
+            if (text === "ОЖИДАНИЕ ВВОДА СИГНАЛА...") return;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Код скопирован в буфер реальности.");
+            });
+        }
+    </script>
+	<script src="logger.js"></script>
+</body>
+		<footer>
+            © 2026 Мелитополь
+        </footer>
+</html>

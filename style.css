@@ -507,3 +507,184 @@ tr:hover td {
     text-shadow: 0 0 30px #ff0000;
     letter-spacing: 15px;
 }
+
+/* --- ENIGMA TERMINAL STYLES --- */
+
+:root {
+    --neon-cyan: #00f7ff;
+    --blood-red: #ff0000;
+    --dark-void: #050505;
+    --panel-bg: #0a0a0a;
+    --border-color: #333;
+}
+
+/* Контейнер всей страницы (если хочешь на весь экран) */
+.enigma-page-wrapper {
+    background-color: var(--dark-void);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Основной корпус терминала */
+.enigma-terminal {
+    background: var(--panel-bg);
+    border: 2px solid var(--border-color);
+    padding: 40px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 1), 
+                inset 0 0 15px rgba(0, 247, 255, 0.05);
+    position: relative;
+    border-radius: 4px;
+}
+
+/* Заголовок с эффектом свечения */
+.enigma-terminal h2 {
+    text-align: center;
+    color: var(--neon-cyan);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+    text-shadow: 0 0 12px var(--neon-cyan);
+    animation: text-flicker 4s infinite;
+}
+
+/* Секция роторов (Ключ) */
+.rotor-section {
+    margin-bottom: 25px;
+    border: 1px solid #1a1a1a;
+    padding: 20px;
+    background: #000;
+    border-left: 4px solid var(--blood-red);
+}
+
+.rotor-section label {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 12px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+#enigma-key {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--blood-red);
+    color: var(--blood-red);
+    width: 100%;
+    padding: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 12px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Поле ввода сообщения */
+#enigma-input {
+    width: 100%;
+    height: 180px;
+    background: #111;
+    border: 1px solid #222;
+    color: var(--neon-cyan);
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    resize: none;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#enigma-input:focus {
+    border-color: var(--neon-cyan);
+    background: #151515;
+}
+
+/* Панель управления (кнопки) */
+.control-panel {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.control-panel button {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 16px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.control-panel button:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 25px var(--neon-cyan);
+}
+
+/* Окно вывода результата */
+.enigma-output-box {
+    margin-top: 35px;
+    padding: 25px;
+    border: 1px dashed #333;
+    background: #000;
+    min-height: 100px;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.enigma-output-box:hover {
+    border-color: var(--neon-cyan);
+}
+
+#enigma-result {
+    color: #fff;
+    word-break: break-all;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.copy-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 15px;
+    font-size: 10px;
+    color: #444;
+    text-transform: uppercase;
+}
+
+/* АНИМАЦИИ */
+@keyframes text-flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.5; }
+    94% { opacity: 1; }
+    95% { opacity: 0.3; }
+    96% { opacity: 1; }
+}
+
+/* Адаптив для мобилок */
+@media (max-width: 600px) {
+    .enigma-terminal {
+        padding: 20px;
+    }
+    .control-panel {
+        flex-direction: column;
+    }
+    #enigma-key {
+        letter-spacing: 4px;
+    }
+}
